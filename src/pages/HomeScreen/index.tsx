@@ -1,25 +1,26 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Button, Text, View} from 'react-native';
-import axiosClient from '../../axios/config';
+// import axiosClient from '../../axios/config';
+
 const HomeScreen = () => {
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const productsAll = async () => {
-      try {
-        const response = await axiosClient({
-          url: '/products/all',
-          method: 'GET',
-        });
+  // useEffect(() => {
+  //   const productsAll = async () => {
+  //     try {
+  //       const response = await axiosClient({
+  //         url: '/products/all',
+  //         method: 'GET',
+  //       });
 
-        console.log('RESPONSE === ', response.data);
-      } catch (error) {
-        console.log('ERROR CATCH ', error);
-      }
-    };
-    productsAll();
-  }, []);
+  //       console.log('RESPONSE === ', response.data);
+  //     } catch (error) {
+  //       console.log('ERROR CATCH ', error);
+  //     }
+  //   };
+  //   productsAll();
+  // }, []);
 
   const handleProfile = () => {
     navigation.navigate('Profile', {});

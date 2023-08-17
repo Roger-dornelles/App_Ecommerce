@@ -14,7 +14,7 @@ export const Text = styled.Text`
 `;
 
 interface TextInputProp extends TextInputProps {
-  marginTop?: number;
+  marginTop?: string;
 }
 export const TextInput = styled.TextInput<TextInputProp>`
   width: 100%;
