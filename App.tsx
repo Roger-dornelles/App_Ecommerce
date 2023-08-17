@@ -10,11 +10,16 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import Navigation from './src/navigators/navigation';
 
+import {store} from './src/store';
+import {Provider} from 'react-redux';
+
 function App(): JSX.Element {
   return (
-    <NavigationContainer>
-      <Navigation />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Navigation />
+      </NavigationContainer>
+    </Provider>
   );
 }
 

@@ -4,14 +4,21 @@ import React from 'react';
 import {Container, Text, TextInput} from './styled';
 interface TextProps {
   text: string;
-  margintop?: number;
+  margintop?: string;
+  value: string | undefined;
+  onChangeText: (value: string) => void;
 }
 
-const Input = ({text, margintop, ...props}: TextProps) => {
+const Input = ({text, margintop, value, onChangeText, ...props}: TextProps) => {
   return (
     <Container>
       <Text>{text}</Text>
-      <TextInput {...props} marginTop={margintop} />
+      <TextInput
+        {...props}
+        marginTop={margintop}
+        value={value}
+        onChangeText={onChangeText}
+      />
     </Container>
   );
 };

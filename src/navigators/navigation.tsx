@@ -15,6 +15,10 @@ import {
   ParamListBase,
   RouteProp,
 } from '@react-navigation/native';
+import RegisterScreen from '../pages/RegisterScreen';
+import Modals from '../components/Modal';
+import {RootState} from '../store';
+import {useSelector} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -56,21 +60,33 @@ const TabNavigation = () => {
 };
 
 const Navigation = () => {
+  const {open, message, type} = useSelector(
+    (state: RootState) => state.modalReducer,
+  );
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Login"
-        component={SigninScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Home"
-        component={TabNavigation}
-        options={{
-          headerShown: false,
-        }}
-      />
-    </Stack.Navigator>
+    <>
+      <Modals type={type} message={message} open={open} />
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={SigninScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Home"
+          component={TabNavigation}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen
+          name="Register"
+          component={RegisterScreen}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </>
   );
 };
 
