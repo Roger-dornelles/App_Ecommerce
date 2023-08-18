@@ -19,6 +19,7 @@ import RegisterScreen from '../pages/RegisterScreen';
 import Modals from '../components/Modal';
 import {RootState} from '../store';
 import {useSelector} from 'react-redux';
+import Header from '../components/Header';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -53,7 +54,11 @@ const TabNavigation = () => {
       })}
       initialRouteName="Produtos">
       <Tab.Screen name="Perfil" component={ProfileScreen} />
-      <Tab.Screen name="Produtos" component={HomeScreen} />
+      <Tab.Screen
+        name="Produtos"
+        component={HomeScreen}
+        // options={{header: () => <Header />}}
+      />
       <Tab.Screen name="Pedidos" component={RequestScreen} />
     </Tab.Navigator>
   );
