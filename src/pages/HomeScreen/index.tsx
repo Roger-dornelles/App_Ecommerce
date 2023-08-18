@@ -1,38 +1,48 @@
-import {useNavigation} from '@react-navigation/native';
-import React from 'react';
-import {Button, Text, View} from 'react-native';
-// import axiosClient from '../../axios/config';
+/* eslint-disable react/no-unstable-nested-components */
+// import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import {FlatList, View} from 'react-native';
+import axiosClient from '../../axios/config';
+import ProductList from '../../components/ProductList';
+import {ProductType} from '../../types/ProductTypes';
+
+interface RenderListType {
+  item: ProductType;
+}
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
+  const [products, setProducts] = useState([]);
 
-  // useEffect(() => {
-  //   const productsAll = async () => {
-  //     try {
-  //       const response = await axiosClient({
-  //         url: '/products/all',
-  //         method: 'GET',
-  //       });
+  useEffect(() => {
+    const productsAll = async () => {
+      try {
+        const response = await axiosClient({
+          url: '/products/all',
+          method: 'GET',
+        });
 
-  //       console.log('RESPONSE === ', response.data);
-  //     } catch (error) {
-  //       console.log('ERROR CATCH ', error);
-  //     }
-  //   };
-  //   productsAll();
-  // }, []);
+        if (response.data) {
+          setProducts(response.data.data);
+        }
+      } catch (error) {
+        console.log('ERROR CATCH ', error);
+      }
+    };
+    productsAll();
+  }, []);
 
-  const handleProfile = () => {
-    navigation.navigate('Profile', {});
+  const RenderList = (item: RenderListType) => {
+    const image = item.item.photosID.map(i => i.link);
+    return <ProductList products={item} image={image} />;
   };
+
+  // const handleProfile = () => {
+  //   navigation.navigate('Profile', {});
+  // };
   return (
     <View>
-      <Text>Ola Mundo</Text>
-      <Button
-        onPress={handleProfile}
-        title="ir para profile"
-        color={'#c3f2d5'}
-      />
+      <FlatList data={products} renderItem={item => RenderList(item)} />
     </View>
   );
 };
