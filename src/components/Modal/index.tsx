@@ -8,7 +8,7 @@ import {setModalAction} from '../../store/reducers/modalReducer';
 
 interface ModalTypes {
   type: 'error' | 'success' | 'warning' | undefined;
-  message: string;
+  message: string | null | undefined;
   open: boolean;
 }
 const Modals = ({type, open, message}: ModalTypes) => {

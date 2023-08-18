@@ -1,8 +1,10 @@
 import axios from 'axios';
 // import {BASE_URL} from '@env';
 
+import config from '../../config';
+
 const axiosClient = axios.create({
-  baseURL: 'http://192.168.1.8:5000',
+  baseURL: config.BASE_URL,
 });
 
 export default axiosClient;
