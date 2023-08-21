@@ -73,16 +73,17 @@ const Navigation = () => {
       <Modals type={type} message={message} open={open} />
       <Stack.Navigator>
         <Stack.Screen
-          name="Login"
-          component={SigninScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
           name="Home"
           component={TabNavigation}
           options={{
             headerShown: false,
           }}
+        />
+
+        <Stack.Screen
+          name="Login"
+          component={SigninScreen}
+          options={{headerShown: false}}
         />
 
         <Stack.Screen
