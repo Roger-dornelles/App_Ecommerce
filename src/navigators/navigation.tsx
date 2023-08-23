@@ -20,6 +20,7 @@ import Modals from '../components/Modal';
 import {RootState} from '../store';
 import {useSelector} from 'react-redux';
 import Header from '../components/Header';
+import DisplayOneProductScreen from '../pages/DisplayOneProductScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -89,6 +90,12 @@ const Navigation = () => {
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="Produto"
+          component={DisplayOneProductScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

@@ -9,5 +9,6 @@ export default {
     red_100: '#ff7171',
     yellow_100: '#ffff8a',
     green_100: '#6fff93',
+    green_50: '#97ffb1',
   },
 };
