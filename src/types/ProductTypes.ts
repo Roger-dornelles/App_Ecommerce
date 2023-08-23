@@ -9,6 +9,7 @@ export interface ImageType {
 }
 
 export interface ProductType {
+  map: (i: any) => any;
   createdAt: string;
   description: string;
   id: number;
