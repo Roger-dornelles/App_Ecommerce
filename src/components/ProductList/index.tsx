@@ -5,6 +5,7 @@ import {Container, Area} from './styles';
 import {ProductType} from '../../types/ProductTypes';
 import Text from '../Text';
 import Image from '../Image';
+import {useNavigation} from '@react-navigation/native';
 
 interface ItemType {
   item: ProductType;
@@ -16,8 +17,10 @@ interface ProductsListProps {
 }
 
 const ProductList = ({products, image}: ProductsListProps) => {
+  const navigation = useNavigation();
+
   const handleDisplayProduct = () => {
-    console.log('clicou ', products);
+    navigation.navigate('Produto', {id: products.item.id});
   };
   return (
     <Container>
