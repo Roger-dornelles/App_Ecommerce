@@ -10,6 +10,7 @@ import {ProductType} from '../../types/ProductTypes';
 import {Dimensions, FlatList} from 'react-native';
 
 import Slide from '../../components/Slide';
+
 const DisplayOneProductScreen = () => {
   const {width, height} = Dimensions.get('window');
   const route = useRoute();
