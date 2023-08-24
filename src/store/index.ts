@@ -2,11 +2,13 @@ import {configureStore} from '@reduxjs/toolkit';
 
 import signinReducer from './reducers/signinReducer';
 import modalReducer from './reducers/modalReducer';
+import cartReducer from './reducers/cartReducer';
 
 export const store = configureStore({
   reducer: {
     signinReducer,
     modalReducer,
+    cartReducer,
   },
 });
 
