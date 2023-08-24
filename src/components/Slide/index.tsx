@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React from 'react';
 import {Dimensions, FlatList} from 'react-native';
 import Text from '../Text';
@@ -13,6 +14,9 @@ import {
   Texts,
   TouchableOpacity,
 } from './styles';
+import {useDispatch} from 'react-redux';
+
+import {setCartAction} from '../../store/reducers/cartReducer';
 
 interface SlideProps {
   product: ProductType[] | undefined;
@@ -21,6 +25,8 @@ interface SlideProps {
 const Slide = ({product, images}: SlideProps) => {
   const {width, height} = Dimensions.get('window');
 
+  const dispatch = useDispatch();
+
   const image = images?.map(i =>
     i.link.replace('http://localhost:5000', config.BASE_URL),
   );
@@ -28,8 +34,8 @@ const Slide = ({product, images}: SlideProps) => {
     return <Image image={img} height={250} width={330} />;
   };
 
-  const handleConfirmPurchase = () => {
-    console.log('clicou');
+  const handleConfirmPurchase = (product: ProductType[] | undefined) => {
+    dispatch(setCartAction(product));
   };
 
   return (
@@ -65,7 +71,7 @@ const Slide = ({product, images}: SlideProps) => {
               </AreaDescription>
             );
           })}
-        <TouchableOpacity onPress={handleConfirmPurchase}>
+        <TouchableOpacity onPress={() => handleConfirmPurchase(product)}>
           <Texts>comprar</Texts>
         </TouchableOpacity>
       </AreaImageAndDescription>

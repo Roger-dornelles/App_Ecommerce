@@ -19,8 +19,9 @@ import RegisterScreen from '../pages/RegisterScreen';
 import Modals from '../components/Modal';
 import {RootState} from '../store';
 import {useSelector} from 'react-redux';
-import Header from '../components/Header';
+
 import DisplayOneProductScreen from '../pages/DisplayOneProductScreen';
+import themes from '../themes/themes';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -46,11 +47,12 @@ const TabStyled = (route: RouteProp<ParamListBase, string>, color: string) => {
 };
 
 const TabNavigation = () => {
+  const {cart} = useSelector((state: RootState) => state.cartReducer);
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({color}) => TabStyled(route, color),
-        tabBarActiveTintColor: '#5577fd',
+        tabBarActiveTintColor: '#6785ff',
         tabBarInactiveTintColor: 'gray',
       })}
       initialRouteName="Produtos">
@@ -58,9 +60,19 @@ const TabNavigation = () => {
       <Tab.Screen
         name="Produtos"
         component={HomeScreen}
-        // options={{header: () => <Header />}}
+        options={{headerShown: false}}
       />
-      <Tab.Screen name="Pedidos" component={RequestScreen} />
+      <Tab.Screen
+        name="Pedidos"
+        component={RequestScreen}
+        options={{
+          tabBarBadge: cart.length,
+          tabBarBadgeStyle: {
+            backgroundColor: themes.theme.blue_100,
+            color: themes.theme.white,
+          },
+        }}
+      />
     </Tab.Navigator>
   );
 };
