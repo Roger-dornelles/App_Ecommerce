@@ -5,6 +5,7 @@ import {FlatList, View} from 'react-native';
 import axiosClient from '../../axios/config';
 import ProductList from '../../components/ProductList';
 import {ProductType} from '../../types/ProductTypes';
+import {useRoute} from '@react-navigation/native';
 
 interface RenderListType {
   item: ProductType;
@@ -12,6 +13,7 @@ interface RenderListType {
 
 const HomeScreen = () => {
   // const navigation = useNavigation();
+
   const [products, setProducts] = useState([]);
 
   useEffect(() => {

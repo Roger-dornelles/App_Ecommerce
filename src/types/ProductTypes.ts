@@ -1,14 +1,14 @@
 export interface ImageType {
-  [x: string]: unknown;
   createdAt: string;
   id: string;
   link: string;
   updatedAt: string;
   userID: string;
-  map: () => unknown;
+  map: () => any;
 }
 
 export interface ProductType {
+  valueProduct?: string;
   map: (i: any) => any;
   createdAt: string;
   description: string;

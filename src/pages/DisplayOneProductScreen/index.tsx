@@ -39,7 +39,7 @@ const DisplayOneProductScreen = () => {
         if (!result?.error) {
           const products = [];
           products.push(result?.data);
-          setImages(result?.data?.images.map(i => i));
+          setImages(result?.data?.images.map((i: any) => i));
           setProduct(products.map((i: any) => i.product));
         }
       } catch (error) {
