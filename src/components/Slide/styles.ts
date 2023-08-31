@@ -16,6 +16,23 @@ export const AreaDescription = styled.View`
   padding: 12px 0;
 `;
 
+export const AreaButtons = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 25px;
+`;
+
+export const Button = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
+  padding: 10px 25px;
+  background-color: ${themes.theme.blue_50};
+`;
+
+export const Input = styled.View`
+  padding: 10px 15px;
+`;
+
 export const TouchableOpacity = styled.TouchableOpacity`
   background-color: ${themes.theme.blue_100};
   color: ${themes.theme.gray_200};
@@ -23,7 +40,7 @@ export const TouchableOpacity = styled.TouchableOpacity`
   margin: 0 auto;
   border-radius: 4px;
   padding: 10px;
-  margin-top: 12px;
+  margin-top: 35px;
   width: 300px;
 `;
 
