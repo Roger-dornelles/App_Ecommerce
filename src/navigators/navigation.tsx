@@ -71,6 +71,7 @@ const TabNavigation = () => {
             backgroundColor: themes.theme.blue_100,
             color: themes.theme.white,
           },
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Dimensions, FlatList} from 'react-native';
 import Text from '../Text';
 import Image from '../Image';
@@ -13,10 +13,14 @@ import {
   Container,
   Texts,
   TouchableOpacity,
+  Button,
+  AreaButtons,
+  Input,
 } from './styles';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {setCartAction} from '../../store/reducers/cartReducer';
+import {RootState} from '../../store';
 
 interface SlideProps {
   product: ProductType[] | undefined;
@@ -25,7 +29,10 @@ interface SlideProps {
 const Slide = ({product, images}: SlideProps) => {
   const {width, height} = Dimensions.get('window');
 
+  const [quantityPurchase, setQuantityPurchase] = useState<number>(1);
+
   const dispatch = useDispatch();
+  const {cart} = useSelector((state: RootState) => state.cartReducer);
 
   const image = images?.map(i =>
     i.link.replace('http://localhost:5000', config.BASE_URL),
@@ -34,9 +41,27 @@ const Slide = ({product, images}: SlideProps) => {
     return <Image image={img} height={250} width={330} />;
   };
 
-  const handleConfirmPurchase = (product: ProductType[] | undefined) => {
-    dispatch(setCartAction(product));
+  const handleConfirmPurchase = (product: ProductType) => {
+    const products = {
+      id: product.id,
+      name: product.name,
+      quantity: quantityPurchase,
+      image: product.photosID.map(i =>
+        i.link.replace('http://localhost:5000', config.BASE_URL),
+      ),
+      userId: product.userID,
+      productAvailable: product.quantity,
+      valueProduct: product.value.replace('R$ ', ''),
+    };
+
+    dispatch(setCartAction(products));
   };
+
+  useEffect(() => {
+    if (quantityPurchase <= 0) {
+      setQuantityPurchase(0);
+    }
+  }, [quantityPurchase]);
 
   return (
     <Container style={{width, height}}>
@@ -50,6 +75,16 @@ const Slide = ({product, images}: SlideProps) => {
 
         {product &&
           product.map((i: any) => {
+            let disabledButtonAddProduct = false;
+            cart.map(cart => {
+              if (cart.id === i.id) {
+                disabledButtonAddProduct =
+                  cart.quantity + quantityPurchase <= cart.productAvailable
+                    ? false
+                    : true;
+              }
+            });
+
             return (
               <AreaDescription key={i.id}>
                 <Text text={i.name} fontSize={18} paddingBottom={10} />
@@ -68,12 +103,35 @@ const Slide = ({product, images}: SlideProps) => {
                   text={`Negociável: ${i.isInstallments ? 'Sim' : 'Não'}`}
                   fontSize={18}
                 />
+
+                <AreaButtons>
+                  <Button
+                    onPress={() => setQuantityPurchase(quantityPurchase + 1)}
+                    disabled={
+                      disabledButtonAddProduct ||
+                      quantityPurchase === i.quantity
+                    }>
+                    <Text fontSize={20} text="+" />
+                  </Button>
+
+                  <Input>
+                    <Text text={`${quantityPurchase}`} />
+                  </Input>
+                  <Button
+                    onPress={() => setQuantityPurchase(quantityPurchase - 1)}
+                    disabled={quantityPurchase === 0}>
+                    <Text fontSize={20} text="-" />
+                  </Button>
+                </AreaButtons>
+
+                <TouchableOpacity
+                  onPress={() => handleConfirmPurchase(i)}
+                  disabled={disabledButtonAddProduct}>
+                  <Texts>comprar</Texts>
+                </TouchableOpacity>
               </AreaDescription>
             );
           })}
-        <TouchableOpacity onPress={() => handleConfirmPurchase(product)}>
-          <Texts>comprar</Texts>
-        </TouchableOpacity>
       </AreaImageAndDescription>
     </Container>
   );

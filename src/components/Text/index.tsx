@@ -7,14 +7,16 @@ interface TextProps {
   fontSize?: number;
   color?: string;
   paddingBottom?: number;
+  textAlign?: 'center' | 'left' | 'right';
 }
-const Text = ({text, fontSize, color, paddingBottom}: TextProps) => {
+const Text = ({text, fontSize, color, paddingBottom, textAlign}: TextProps) => {
   return (
     <AreaText
       style={{
         fontSize: fontSize ? fontSize : 15,
-        color: color ? color : '',
+        color: color && color,
         paddingBottom: paddingBottom && paddingBottom,
+        textAlign: textAlign && textAlign,
       }}>
       {text}
     </AreaText>
