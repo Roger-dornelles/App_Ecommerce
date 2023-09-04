@@ -5,14 +5,16 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import {Container, Logo, Text, Touchable, ContainerRegister} from './styled';
 import themes from '../../themes/themes';
-import {useDispatch} from 'react-redux';
 
 import {setModalAction} from '../../store/reducers/modalReducer';
 import ValidateEmail from '../../utils/validateEmail';
 import ValidatePassword from '../../utils/validatePassword';
 
 import Signin from '../../api/Signin';
+import apiUser from '../../api/userInfo';
 import {setTokenAction} from '../../store/reducers/signinReducer';
+import {useDispatch} from 'react-redux';
+import {setUserAction} from '../../store/reducers/userReducer';
 
 const Signing = () => {
   const navigation = useNavigation();
@@ -85,11 +87,43 @@ const Signing = () => {
           }),
         );
 
-        dispatch(setTokenAction(result?.data as unknown as string));
+        if (result?.data) {
+          const response = await apiUser.userInfo(
+            result.data as unknown as string,
+          );
+
+          if (response?.error) {
+            return;
+          }
+
+          if (!response?.error) {
+            dispatch(
+              setUserAction({
+                user: {
+                  id: response?.data?.id,
+                  email: response?.data?.email,
+                  exp: response?.data?.exp,
+                  iat: response?.data?.iat,
+                },
+              }),
+            );
+            dispatch(
+              setTokenAction({
+                token: {
+                  token: result.data as unknown as string,
+                  exp: response?.data?.exp,
+                  iat: response?.data?.iat,
+                },
+              }),
+            );
+          }
+        }
+
         navigation.reset({
           index: 0,
           routes: [{name: 'Home'}],
         });
+
         return;
       }
     } catch (error) {

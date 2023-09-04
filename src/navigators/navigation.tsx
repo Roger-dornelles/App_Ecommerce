@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../pages/HomeScreen';
@@ -18,10 +18,11 @@ import {
 import RegisterScreen from '../pages/RegisterScreen';
 import Modals from '../components/Modal';
 import {RootState} from '../store';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import DisplayOneProductScreen from '../pages/DisplayOneProductScreen';
 import themes from '../themes/themes';
+import {setUserAction} from '../store/reducers/userReducer';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -41,6 +42,9 @@ const TabStyled = (route: RouteProp<ParamListBase, string>, color: string) => {
     case 'Produtos':
       iconName = 'home';
       break;
+
+    case 'Login':
+      iconName = 'warehouse';
   }
 
   return <Icon name={iconName} size={24} color={color} />;
@@ -48,19 +52,43 @@ const TabStyled = (route: RouteProp<ParamListBase, string>, color: string) => {
 
 const TabNavigation = () => {
   const {cart} = useSelector((state: RootState) => state.cartReducer);
+  const dispatch = useDispatch();
+  const {token} = useSelector((state: RootState) => state.signinReducer);
+
+  useEffect(() => {
+    if (!token.token) {
+      dispatch(
+        setUserAction({
+          user: {
+            id: 0,
+            email: undefined,
+            exp: 0,
+            iat: 0,
+          },
+        }),
+      );
+    }
+  }, [dispatch, token.token]);
+
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({color}) => TabStyled(route, color),
         tabBarActiveTintColor: '#6785ff',
         tabBarInactiveTintColor: 'gray',
+        tabBarLabelStyle: {fontSize: 13},
       })}
       initialRouteName="Produtos">
-      <Tab.Screen name="Perfil" component={ProfileScreen} />
+      {token.token && <Tab.Screen name="Perfil" component={ProfileScreen} />}
       <Tab.Screen
         name="Produtos"
         component={HomeScreen}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          tabBarLabelStyle: {
+            fontSize: 12,
+          },
+        }}
       />
       <Tab.Screen
         name="Pedidos"
@@ -74,6 +102,15 @@ const TabNavigation = () => {
           headerShown: false,
         }}
       />
+      {!token.token && (
+        <Tab.Screen
+          name={'Login'}
+          component={SigninScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+      )}
     </Tab.Navigator>
   );
 };
