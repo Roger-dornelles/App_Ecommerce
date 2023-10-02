@@ -15,6 +15,8 @@ import {useDispatch} from 'react-redux';
 import {setRemoverItemCartAction} from '../../store/reducers/cartReducer';
 import {useNavigation} from '@react-navigation/native';
 import Button from '../Button';
+import {useAuth} from '../../hooks/useAuth';
+import {useCurrencyFormetted} from '../../hooks/useCurrencyFormatted';
 
 interface DisplayCartTypes {
   cart: ProductCart[];
@@ -23,6 +25,7 @@ interface DisplayCartTypes {
 const DisplayCart = ({cart}: DisplayCartTypes) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const {AuthRoute} = useAuth();
 
   const handleRemoveProductCart = (id: number) => {
     dispatch(setRemoverItemCartAction({id}));
@@ -32,24 +35,10 @@ const DisplayCart = ({cart}: DisplayCartTypes) => {
     navigation.navigate('Produto', {id: [productID]});
   };
 
-  let currencyFormatted = '';
-  let total = 0;
-  for (let i = 0; i < cart.length; i++) {
-    total += Number(
-      cart[i].valueProduct
-        .substring(2, cart[i].valueProduct.length - 2)
-        .replace(',', '')
-        .replace('.', '') * cart[i].quantity,
-    );
-
-    currencyFormatted = total.toLocaleString('pt-br', {
-      style: 'currency',
-      currency: 'BRL',
-    });
-  }
+  const currencyFormatted = useCurrencyFormetted();
 
   const handleConfirmPurchase = () => {
-    console.log('clicou');
+    AuthRoute('Endereço');
   };
 
   return (
@@ -101,7 +90,11 @@ const DisplayCart = ({cart}: DisplayCartTypes) => {
               paddingBottom={15}
             />
           </TotalPurchase>
-          <Button title="Comprar" onPress={handleConfirmPurchase} />
+          <Button
+            title="Finalizar Compra"
+            BgColor={themes.theme.green}
+            onPress={handleConfirmPurchase}
+          />
         </AreaTotalProduct>
       )}
 

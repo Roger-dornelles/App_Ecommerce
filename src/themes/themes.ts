@@ -1,5 +1,6 @@
 export default {
   theme: {
+    black: '#000',
     white: '#fff',
     blue_50: '#b3d9ff',
     blue_100: '#64b1ff',
@@ -13,5 +14,7 @@ export default {
     yellow_100: '#ffff8a',
     green_100: '#6fff93',
     green_50: '#97ffb1',
+    green_200: '#37ff37',
+    green: '#00ce34',
   },
 };
