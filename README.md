@@ -19,6 +19,11 @@ Criação da versão mobile do projeto de ecommerce
 
 
 ## Para executar o projeto
+- Fazer o clone do projeto, no Prompt de comando ( CMD ) ou terminal de sua preferencia executar o comando
+
+```bash
+  git clone 
+```
 
 
 
