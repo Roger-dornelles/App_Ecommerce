@@ -22,6 +22,7 @@ const ProductList = ({products, image}: ProductsListProps) => {
   const handleDisplayProduct = () => {
     navigation.navigate('Produto', {id: products.item.id});
   };
+
   return (
     <Container>
       <Area onPress={handleDisplayProduct}>

@@ -4,6 +4,7 @@ import signinReducer from './reducers/signinReducer';
 import modalReducer from './reducers/modalReducer';
 import cartReducer from './reducers/cartReducer';
 import useReducer from './reducers/userReducer';
+import newAddress from './reducers/newAddress';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     modalReducer,
     cartReducer,
     useReducer,
+    newAddress,
   },
 });
 

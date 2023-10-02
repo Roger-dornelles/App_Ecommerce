@@ -4,12 +4,13 @@ import {Buttons, Container} from './styled';
 interface ButtonProps {
   title: string;
   onPress?: () => void;
+  BgColor?: string;
 }
 
-const Button = ({title, onPress}: ButtonProps) => {
+const Button = ({title, onPress, BgColor}: ButtonProps) => {
   return (
     <Container>
-      <Buttons title={title} onPress={onPress} />
+      <Buttons title={title} onPress={onPress} color={BgColor} />
     </Container>
   );
 };

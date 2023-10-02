@@ -20,7 +20,7 @@ const Modals = ({type, open, message}: ModalTypes) => {
     if (open) {
       setModalVisible(true);
     }
-  }, [open]);
+  }, [open, setModalVisible]);
 
   let BgColors: string = '';
   if (type === 'error') {
