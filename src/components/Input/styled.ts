@@ -15,11 +15,13 @@ export const Text = styled.Text`
 
 interface TextInputProp extends TextInputProps {
   marginTop?: string;
+  error?: boolean;
+  width?: string;
 }
 export const TextInput = styled.TextInput<TextInputProp>`
-  width: 100%;
+  width: ${({width}) => (width ? width : '100%')};
   height: 35px;
-  border: 1px solid #c7c7c7;
+  border: ${({error}) => (error ? '1px solid red' : '1px solid #c7c7c7')};
   font-size: 18px;
   padding: 6px 0;
   padding-left: 6px;

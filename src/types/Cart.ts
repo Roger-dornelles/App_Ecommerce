@@ -23,4 +23,5 @@ export interface ProductCart {
   quantity: number;
   productAvailable: number;
   valueProduct: string | number | any;
+  totalPurchase?: string | number;
 }

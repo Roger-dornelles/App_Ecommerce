@@ -69,7 +69,7 @@ const Slide = ({product, images}: SlideProps) => {
       <AreaImageAndDescription>
         <FlatList
           data={image}
-          renderItem={item => handleImages(item.item)}
+          renderItem={({item}) => handleImages(item)}
           horizontal
         />
 
