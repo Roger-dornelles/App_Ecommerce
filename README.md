@@ -13,7 +13,11 @@ Criação da versão mobile do projeto de ecommerce
 ## Dependecias do projeto
 
 - React native
+- Axios
 - Styled components
+- Jwt ( Json Web Token )
+- Redux ( ReduX toolKit )
+- React Native Vector Icons
 
 
 
