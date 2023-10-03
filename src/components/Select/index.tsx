@@ -38,6 +38,7 @@ const Select = ({data, handleDisplayListState, text}: SelectProps) => {
 
   return (
     <Container>
+      <Text text="Estado" fontSize={16} />
       <Button onPress={() => setModalVisible(true)}>
         <Text
           text={stateSelected ? stateSelected : text}
