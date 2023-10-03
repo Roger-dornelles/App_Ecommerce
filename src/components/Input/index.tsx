@@ -14,6 +14,7 @@ interface TextProps {
   isError?: boolean;
   messageError?: string;
   width?: string;
+  fontSizeError?: number;
 }
 
 const Input = ({
@@ -26,6 +27,7 @@ const Input = ({
   isError,
   messageError,
   width,
+  fontSizeError,
   ...props
 }: TextProps) => {
   return (
@@ -42,7 +44,13 @@ const Input = ({
         width={width}
       />
       {isError && (
-        <Text style={{position: 'absolute', bottom: -10, color: 'red'}}>
+        <Text
+          style={{
+            position: 'absolute',
+            bottom: -10,
+            color: 'red',
+            fontSize: fontSizeError ? fontSizeError : 14,
+          }}>
           {messageError}
         </Text>
       )}
