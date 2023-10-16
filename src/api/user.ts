@@ -24,7 +24,6 @@ export default {
           data: null,
         };
       }
-
       if (!response.data.error) {
         return {
           error: false,
@@ -35,7 +34,7 @@ export default {
     } catch (error) {
       return {
         error: true,
-        message: 'Ocorreu um erro, tente mais tarde',
+        message: 'Ocorreu um erro, tente mais tarde ',
         data: null,
       };
     }
