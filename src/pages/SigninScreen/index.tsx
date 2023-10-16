@@ -15,6 +15,7 @@ import apiUser from '../../api/userInfo';
 import {setTokenAction} from '../../store/reducers/signinReducer';
 import {useDispatch} from 'react-redux';
 import {setUserAction} from '../../store/reducers/userReducer';
+import axiosClient from '../../axios/config';
 
 const Signing = () => {
   const navigation = useNavigation();
@@ -97,6 +98,7 @@ const Signing = () => {
           }
 
           if (!response?.error) {
+            axiosClient.defaults.headers.common.Authorization = `Bearer ${result.data}`;
             dispatch(
               setUserAction({
                 user: {
