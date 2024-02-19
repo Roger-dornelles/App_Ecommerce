@@ -1,6 +1,7 @@
 import {ProductCart} from './Cart';
 
 export interface PurchaseTypes {
+  [x: string]: any;
   id: number;
   userID: number;
   name: string;
@@ -23,4 +24,16 @@ export interface PurchaseTypes {
   totalPurchase: string;
   userProductDataOfPurchase: ProductCart[];
   numberAddress: string;
+}
+
+export interface PurchaseUser {
+  cardName: string;
+  id: number;
+  image: string;
+  name: string;
+  productAvailable: number;
+  quantity: number;
+  userId: number;
+  valueProduct: string;
+  userProductDataOfPurchase: ProductCart;
 }

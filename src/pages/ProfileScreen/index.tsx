@@ -11,10 +11,12 @@ import {InfoUser} from '../../types/InfoUser';
 import {Container, ContainerUserInfo, TouchableOpacity} from './styles';
 import Text from '../../components/Text';
 import themes from '../../themes/themes';
+import {useAuth} from '../../hooks/useAuth';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const {AuthRoute} = useAuth();
 
   const {user} = useSelector((state: RootState) => state.useReducer);
 
@@ -37,7 +39,13 @@ const ProfileScreen = () => {
           }
 
           if (result?.error) {
-            console.log('error');
+            dispatch(
+              setModalAction({
+                message: 'Ocorreu um erro ao exibir dados do usuario',
+                open: true,
+                type: 'error',
+              }),
+            );
           }
 
           if (!result?.error) {
@@ -71,7 +79,7 @@ const ProfileScreen = () => {
   };
 
   const handlePurchaseUser = () => {
-    console.log('clicou');
+    AuthRoute('Compras');
   };
 
   return (

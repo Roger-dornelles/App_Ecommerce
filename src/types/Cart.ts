@@ -16,6 +16,7 @@ export interface Cart {
 }
 
 export interface ProductCart {
+  [x: string]: any;
   id: number;
   name: string;
   image: string;
