@@ -11,6 +11,7 @@ import RegisterScreen from '../pages/RegisterScreen';
 import DisplayOneProductScreen from '../pages/DisplayOneProductScreen';
 import NewAddressScreen from '../pages/NewAddressScreen';
 import AddressScreen from '../pages/AddressScreen';
+import UserPurchase from '../pages/UserPurchase';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -174,6 +175,7 @@ const Navigation = () => {
             <Stack.Screen name="Endereço" component={AddressScreen} />
             <Stack.Screen name="Pagamento" component={ConfirmPurchase} />
             <Stack.Screen name="Novo Endereço" component={NewAddressScreen} />
+            <Stack.Screen name="Compras" component={UserPurchase} />
           </>
         ) : (
           <>
