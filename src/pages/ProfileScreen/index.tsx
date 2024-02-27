@@ -78,6 +78,10 @@ const ProfileScreen = () => {
     navigation.navigate('Produtos', {});
   };
 
+  const handleEditProfile = () => {
+    AuthRoute('Editar Perfil');
+  };
+
   const handlePurchaseUser = () => {
     AuthRoute('Compras');
   };
@@ -92,7 +96,9 @@ const ProfileScreen = () => {
           <Text text={infoUser.state} />
           <Text text={infoUser.logradouro} />
           <Text text={infoUser.district} />
-          <TouchableOpacity BgColor={themes.theme.green}>
+          <TouchableOpacity
+            BgColor={themes.theme.green}
+            onPress={handleEditProfile}>
             <Text text="Editar" textAlign="center" color={themes.theme.white} />
           </TouchableOpacity>
         </ContainerUserInfo>
