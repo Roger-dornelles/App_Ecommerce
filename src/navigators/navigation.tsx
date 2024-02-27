@@ -26,6 +26,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import themes from '../themes/themes';
 import {setUserAction} from '../store/reducers/userReducer';
+import EditProfileScreen from '../pages/EditProfileScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -176,6 +177,7 @@ const Navigation = () => {
             <Stack.Screen name="Pagamento" component={ConfirmPurchase} />
             <Stack.Screen name="Novo Endereço" component={NewAddressScreen} />
             <Stack.Screen name="Compras" component={UserPurchase} />
+            <Stack.Screen name="Editar Perfil" component={EditProfileScreen} />
           </>
         ) : (
           <>
